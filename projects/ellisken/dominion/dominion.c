@@ -744,8 +744,9 @@ int cardFeast(struct gameState *state, int temphand[], int currentPlayer, int ch
 }
 
  
-int cardAmbassador(int choice1, int choice2, struct gameState *state, int handPos, int currenPlayer)
+int cardAmbassador(int choice1, int choice2, struct gameState *state, int handPos, int currentPlayer)
 {
+    int i; //used in for loop
     int j = 0;		//used to check if player has enough cards to discard
 
       if (choice2 > 2 || choice2 < 0)
@@ -857,7 +858,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 			
     case feast:
-      cardFeast(gameState *state, temphand[], currentPlayer, choice1);
+      cardFeast(state, temphand, currentPlayer, choice1);
 			
     case mine:
       j = state->hand[currentPlayer][choice1];  //store card we will trash
@@ -1131,7 +1132,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 		
     case ambassador:
 
-      cardAmbassador(choice1, choice2, gameState *state, handPos, currenPlayer);
+      cardAmbassador(choice1, choice2, state, handPos, currentPlayer);
 		
     case cutpurse:
 
