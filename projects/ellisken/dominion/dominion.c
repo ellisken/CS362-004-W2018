@@ -649,7 +649,7 @@ int cardSmithy(int currentPlayer, struct gameState *state, int handPos)
   int i;
 
   //+3 Cards
-  for (i = 0; i < 3; i++)
+  for (i = 0; i <= 3; i++)
   {  
     drawCard(currentPlayer, state);
   }
@@ -668,12 +668,12 @@ int cardAdventurer(int drawntreasure, struct gameState *state, int currentPlayer
 	}
 	drawCard(currentPlayer, state);
 	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+	if (cardDrawn == gold)
 	  drawntreasure++;
 	else{
 	  temphand[z]=cardDrawn;
 	  state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-	  z++;
+	  //z++;
 	}
       }
       while(z-1>=0){
@@ -701,7 +701,7 @@ int cardFeast(struct gameState *state, int temphand[], int currentPlayer, int ch
       //Update Coins for Buy
       updateCoins(currentPlayer, state, 5);
       x = 1;//Condition to loop on
-      while( x == 1) {//Buy one card
+      while( x = 1) {//Buy one card
 	if (supplyCount(choice1, state) <= 0){
 	  if (DEBUG)
 	    printf("None of that card left, sorry!\n");
@@ -711,7 +711,7 @@ int cardFeast(struct gameState *state, int temphand[], int currentPlayer, int ch
 	  }
 	}
 	else if (state->coins < getCost(choice1)){
-	  printf("That card is too expensive!\n");
+	  //printf("That card is too expensive!\n");
 
 	  if (DEBUG){
 	    printf("Coins: %d < %d\n", state->coins, getCost(choice1));
@@ -811,8 +811,8 @@ int cardSea_hag(struct gameState *state, int currentPlayer)
     int i; //Index variable for the for loop
     for (i = 0; i < state->numPlayers; i++){
 	if (i != currentPlayer){
-	  state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];			    state->deckCount[i]--;
-	  state->discardCount[i]++;
+	  state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];			    state->deckCount[i]++;
+	  state->discardCount[i]--;
 	  state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
 	}
       }
