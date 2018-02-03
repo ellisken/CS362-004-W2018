@@ -18,18 +18,18 @@
 
 int main(){
     //Initialize gameState with 2 players
-    int numPlayers = 2;
+    int playerCount = 2;
     int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy, council_room};
-    int seed = 1000; //For randomizing the shuffling result
+    int seed = 3; //For randomizing the shuffling result
     struct gameState testState;
 
     printf("All initializeGame inputs created.\n");
 
-    initializeGame(numPlayers, k, seed, &testState);
+    initializeGame(playerCount, k, seed, &testState);
 
     printf("initializeGame called\n");
 
-    assert(testState != NULL);
+    assert(&testState != NULL);
 
 
     //For each card type whose supply is necessarily filled 
