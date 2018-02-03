@@ -15,37 +15,49 @@
 #include <stdio.h>
 #include "rngs.h"
 #include <stdlib.h>
+#include <string.h>
+
+int assertTrue(int exp){
+    if(exp)
+        return 1;
+    else return 0;
+}
 
 int main(){
     //Print title
-    printf("Unit Test 2: isGameOver()\n\n");
+    printf("\n\nUnit Test 2: isGameOver()\n\n");
 
     //Initialize gameState with 2 players
     int i;
+    int success_ct = 0; //For tallying successful tests
     int playerCount = 2;
     int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy, council_room};
     int seed = 3; //For randomizing shuffling result
-    struct gameState testState;
+    struct gameState state, testState;
 
-    initializeGame(playerCount, k, seed, &testState);
+    initializeGame(playerCount, k, seed, &state);
 
 
 
     //TEST 1 - Test if Game is over based on supply piles/province count
-    //at game beginning. Province cards == 8 and no supply == 0, so Game should not be over
+    //at game beginning. Province cards == 8 and no supply == 0, so Game should not be over.
+    //This test is meant as a control.
     printf("TEST 1: Game NOT over after initialization of gameState for play\n");
-    if(isGameOver(&testState) == 1)
-        printf("---TEST 1 failed---\n");
-    else printf("---TEST 1 passed---\n");
-
+    if(isGameOver(&state) == 0){
+        printf("---TEST 1 passed---\n");
+        success_ct++;}
+    else printf("---TEST 1 failed---\n");
 
 
     //TEST 2 - Change province card count to empty and check Game over detection.
+    memcpy(&testState, &state, sizeof(struct gameState)); //Copy original state to test state
     testState.supplyCount[province] = 0;
 
     printf("TEST 2: Game OVER after province supply set to 0\n");
-    if(isGameOver(&testState) == 1)
+
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 2 passed---\n");
+        success_ct++;}
     else printf("---TEST 2 failed---\n");
 
 
@@ -59,8 +71,9 @@ int main(){
     testState.supplyCount[province] = 1;
 
     printf("TEST 3: Game OVER when province supply > 0, but all other supplies empty\n");
-    if(isGameOver(&testState) == 1)
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 3 passed---\n");
+        success_ct++;}
     else printf("---TEST 3 failed---\n");
 
 
@@ -76,8 +89,9 @@ int main(){
     testState.supplyCount[estate] = 0;
 
     printf("TEST 4: Game NOT over when province > 0 and exactly 2 cards in beginning of enum==0\n");
-    if(isGameOver(&testState) == 0)
+    if(isGameOver(&testState) == isGameOver(&state)){
         printf("---TEST 4 passed---\n");
+        success_ct++;}
     else printf("---TEST 4 failed---\n");
 
     
@@ -93,8 +107,9 @@ int main(){
     testState.supplyCount[treasure_map] = 0;
 
     printf("TEST 5: Game NOT over when province > 0 and exactly 2 cards in end of enum==0\n");
-    if(isGameOver(&testState) == 0)
+    if(isGameOver(&testState) == isGameOver(&state)){
         printf("---TEST 5 passed---\n");
+        success_ct++;}
     else printf("---TEST 5 failed---\n");
 
 
@@ -110,8 +125,9 @@ int main(){
     testState.supplyCount[duchy] = 0;
 
     printf("TEST 6: Game OVER when province > 0 and exactly 3 cards in beginning of enum==0\n");
-    if(isGameOver(&testState) == 1)
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 6 passed---\n");
+        success_ct++;}
     else printf("---TEST 6 failed---\n");
 
 
@@ -127,8 +143,9 @@ int main(){
     testState.supplyCount[treasure_map] = 0;
     
     printf("TEST 7: Game OVER when province > 0 and exactly 3 cards in end of enum==0\n");
-    if(isGameOver(&testState) == 1)
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 7 passed---\n");
+        success_ct++;}
     else printf("---TEST 7 failed---\n");
 
 
@@ -145,8 +162,9 @@ int main(){
     testState.supplyCount[copper] = 0;
     
     printf("TEST 8: Game OVER when province > 0 and exactly 4 cards in supply are empty\n");
-    if(isGameOver(&testState) == 1)
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 8 passed---\n");
+        success_ct++;}
     else printf("---TEST 8 failed---\n");
 
     
@@ -157,9 +175,13 @@ int main(){
     }
 
     printf("TEST 9: Game OVER when supply of ALL cards is empty\n");
-    if(isGameOver(&testState) == 1)
+    if(isGameOver(&testState) == !isGameOver(&state)){
         printf("---TEST 9 passed---\n");
+        success_ct++;}
     else printf("---TEST 9 failed---\n");
+
+    if(success_ct == 9) printf("\nAll tests PASSED. SUCCESS.\n");
+    else printf("\nAt least one test FAILED. please review.\n");
 
     return 0;
 }
