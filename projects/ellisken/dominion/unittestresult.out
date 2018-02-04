@@ -106,3 +106,915 @@ File 'dominion.c'
 Lines executed:16.12% of 552
 Creating 'dominion.c.gcov'
 
+
+
+Unit Test 2: isGameOver()
+
+TEST 1: Game NOT over after initialization of gameState for play
+---TEST 1 passed---
+TEST 2: Game OVER after province supply set to 0
+---TEST 2 passed---
+TEST 3: Game OVER when province supply > 0, but all other supplies empty
+---TEST 3 passed---
+TEST 4: Game NOT over when province > 0 and exactly 2 cards in beginning of enum==0
+---TEST 4 passed---
+TEST 5: Game NOT over when province > 0 and exactly 2 cards in end of enum==0
+---TEST 5 passed---
+TEST 6: Game OVER when province > 0 and exactly 3 cards in beginning of enum==0
+---TEST 6 passed---
+TEST 7: Game OVER when province > 0 and exactly 3 cards in end of enum==0
+---TEST 7 failed---
+TEST 8: Game OVER when province > 0 and exactly 4 cards in supply are empty
+---TEST 8 passed---
+TEST 9: Game OVER when supply of ALL cards is empty
+---TEST 9 passed---
+
+At least one test FAILED. please review.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:0.00% of 13
+
+Function 'cardEffect'
+Lines executed:0.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:0.00% of 15
+
+Function 'cardSmithy'
+Lines executed:0.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:0.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:0.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:0.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:17.93% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Unit Test 3: fullDeckCount()
+
+
+
+TEST 1: Change deck contents of Player 1, assert deck count change from Player 2 and original state
+---TEST 1 passed---
+
+
+TEST 2: Change deck contents of Players 1&2, assert deck count change from original state
+---TEST 2 passed---
+
+
+TEST 3: Change hand contents of Player 1, assert hand count change from Player 2 and original state
+---TEST 3 passed---
+
+
+TEST 4: Change discard contents of Player 1, assert deck count change from Player 2 and original state
+---TEST 4 passed---
+
+
+TEST 5 - Compare manual deck count to fullDeckCount()
+---TEST 5 passed for player 0
+---TEST 5 passed for player 1
+
+All tests PASSED. SUCCESS.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:0.00% of 13
+
+Function 'cardEffect'
+Lines executed:0.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:0.00% of 15
+
+Function 'cardSmithy'
+Lines executed:0.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:0.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:0.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:19.57% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Unit Test 4: scoreFor()
+
+i
+
+TEST 1: Compare manual score count with scoreFor() result
+
+
+
+Manually counting hand card 0
+Card: 1, manual count total: 1
+
+
+Manually counting hand card 1
+Card: 4, manual count total: 1
+
+
+Manually counting hand card 2
+Card: 1, manual count total: 2
+
+
+Manually counting hand card 3
+Card: 4, manual count total: 2
+
+
+Manually counting hand card 4
+Card: 4, manual count total: 2
+
+
+Manually counting deck card 0
+Card: 1, manual count total: 3
+
+
+Manually counting deck card 1
+Card: 4, manual count total: 3
+
+
+Manually counting deck card 2
+Card: 4, manual count total: 3
+
+
+Manually counting deck card 3
+Card: 4, manual count total: 3
+
+
+Manually counting deck card 4
+Card: 4, manual count total: 3
+Manual score at start: 3
+Functional score at start: 2
+---TEST 1 failed for player 0---
+
+
+Manually counting deck card 0
+Card: 1, manual count total: 1
+
+
+Manually counting deck card 1
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 2
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 3
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 4
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 5
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 6
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 7
+Card: 4, manual count total: 1
+
+
+Manually counting deck card 8
+Card: 1, manual count total: 2
+
+
+Manually counting deck card 9
+Card: 1, manual count total: 3
+Manual score at start: 3
+Functional score at start: 0
+---TEST 1 failed for player 1---
+
+
+TEST 2: Change card counts for first player in test state and compare
+
+scoreFor testState Player 1 EXPECTED: 66
+scoreFor testState Player 1 ACTUAL: 4
+scoreFor state Player 1 EXPECTED: 3
+scoreFor testState Player 1 ACTUAL: 2
+---TEST 2 failure---
+
+At least one test failed. Please review results.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:0.00% of 13
+
+Function 'cardEffect'
+Lines executed:0.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:0.00% of 15
+
+Function 'cardSmithy'
+Lines executed:0.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:50.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:0.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:21.74% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Card Test 1: cardSmithy()
+
+
+Game Initialized
+Deck count starts at: 5
+
+Smithy played by player 1 with hand position 0
+Deck count is now: 1
+
+
+TEST 1 - Check exactly 3 cards drawn from player 1's deck
+
+---TEST 1 failed---
+
+
+TEST 2 - Check exactly 3 cards added to player 1's hand
+
+Hand count initial (test): 5, hand count after play (test) 8
+---TEST 1 failed---
+
+
+TEST 3 - Check state has not changed for player 2 (handCount, discardCount)
+
+Hand count initial (test): 0, hand count after play (test) 0
+---TEST 3 for new handCount (same) Successful---
+Deck count initial (test): 10, deck count after play (test) 10
+---TEST 3 for new deckCount (same) Successful---
+
+
+TEST 4 - Check state has not changed for kingdom pile
+
+---TEST 4 Successful for k[0] ---
+---TEST 4 Successful for k[1] ---
+---TEST 4 Successful for k[2] ---
+---TEST 4 Successful for k[3] ---
+---TEST 4 Successful for k[4] ---
+---TEST 4 Successful for k[5] ---
+---TEST 4 Successful for k[6] ---
+---TEST 4 Successful for k[7] ---
+---TEST 4 Successful for k[8] ---
+---TEST 4 Successful for k[9] ---
+
+At least one test failed. Please review results.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:84.62% of 13
+
+Function 'cardEffect'
+Lines executed:0.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:0.00% of 15
+
+Function 'cardSmithy'
+Lines executed:100.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:50.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:0.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:24.64% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Card Test 2: cardAdventurer()
+
+Initializing game
+Copying state into testState
+Top card is now: 4
+Adding treasure cards to top of deck
+Top card is now: 6
+Top card is now: 5
+Playing Adventurer Card
+
+
+TEST 1: top two deck cards == treasure (copper, silver, or gold) && cards drawn == 2
+
+drawnTreasure before: 0, drawnTreasure after: 0
+deck count player 1 before: 7, after: 5
+Top card is now: 4
+---TEST 1 Failed - either drawnTreasure != 2 || 2 cards were not drawn from player 1's deck---
+
+Copying state into testState
+Top card is now: 4
+Adding treasure cards to top of deck
+Top card is now: 6
+Adding non-treasure cards to top of deck
+Top card is now: 25
+Top card is now: 10
+Playing Adventurer Card
+
+
+TEST 2: Test correct discarding of revealed cards
+
+Top of player 1's discard pile is: 10
+Second from top is: 25
+---TEST 2 Successful---
+
+
+TEST 3: Test game state unchanged for other players (player 2)
+
+---TEST 3 for handCount Successful---
+---TEST 3 for deckCount Successful---
+---TEST 3 for discardCount Successful---
+
+
+TEST 4: Check Kingdom pile unchanged
+
+---TEST 4 successful for k[0]---
+---TEST 4 successful for k[1]---
+---TEST 4 successful for k[2]---
+---TEST 4 successful for k[3]---
+---TEST 4 successful for k[4]---
+---TEST 4 successful for k[5]---
+---TEST 4 successful for k[6]---
+---TEST 4 successful for k[7]---
+---TEST 4 successful for k[8]---
+---TEST 4 successful for k[9]---
+
+At least one test failed. Please review results.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:84.62% of 13
+
+Function 'cardEffect'
+Lines executed:0.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:93.33% of 15
+
+Function 'cardSmithy'
+Lines executed:100.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:50.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:0.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:27.17% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Card Test 3: gardens
+
+
+
+TEST 1: Check return value of cardEffect() as expected (== -1)
+
+---TEST 1 passed---
+
+
+TEST 2: Check playing gardens did not affect simple gameState values
+
+---TEST 2 passed---
+
+
+TEST 3: Check playing gardens did not affect array gameState values
+
+---TEST 3 passed---
+
+All tests passed. SUCCESS.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:84.62% of 13
+
+Function 'cardEffect'
+Lines executed:5.00% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:93.33% of 15
+
+Function 'cardSmithy'
+Lines executed:100.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:50.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:100.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:29.17% of 552
+Creating 'dominion.c.gcov'
+
+
+
+Card Test 4: great hall
+
+
+
+TEST 1: Check return value is as expected (0)
+
+---TEST 1 passed---
+
+
+TEST 2: Check player 1 deck decreased by 1
+
+---TEST 2 passed---
+
+
+TEST 3: Check that state gained action
+
+---TEST 3 passed---
+
+
+TEST 4: Check that player's discard pile has increased
+
+---TEST 4 failed---
+
+
+TEST 5: Check that state int values unchanged for player 2
+
+Played card count before: 0, played card count after: 1
+---TEST 5 failed played card ct---
+
+
+TEST 6: Check playing great hall did not affect array gameState values
+
+---TEST 6 passed---
+
+At least one test failed. Please review results.
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:0.00% of 13
+
+Function 'discardCard'
+Lines executed:84.62% of 13
+
+Function 'cardEffect'
+Lines executed:7.22% of 180
+
+Function 'cardSea_hag'
+Lines executed:0.00% of 7
+
+Function 'cardAmbassador'
+Lines executed:0.00% of 22
+
+Function 'cardFeast'
+Lines executed:0.00% of 11
+
+Function 'cardAdventurer'
+Lines executed:93.33% of 15
+
+Function 'cardSmithy'
+Lines executed:100.00% of 5
+
+Function 'getCost'
+Lines executed:0.00% of 30
+
+Function 'drawCard'
+Lines executed:36.36% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:50.00% of 24
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+
+Function 'endTurn'
+Lines executed:0.00% of 20
+
+Function 'whoseTurn'
+Lines executed:100.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:100.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:0.00% of 3
+
+Function 'numHandCards'
+Lines executed:0.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:0.00% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:80.65% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:83.33% of 6
+
+File 'dominion.c'
+Lines executed:29.89% of 552
+Creating 'dominion.c.gcov'
+
