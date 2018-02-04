@@ -2,7 +2,12 @@
  ** Program Filename: cardtest1.c
  ** Author: Kendra Ellis, ellisken@oregonstate.edu
  ** Date: February 4, 2018
- ** Description: tests cardSmithy() from dominion.c
+ ** Description: tests play of great hall card using cardEffect()
+ **         from dominion.c. Great Hall should draw 1 card
+ **         for the current player and add to number of
+ **         actions remaining for the player. All other
+ **         gameState members should be unaffected. All other
+ **         players should be unaffected.
  ** Input: function takes currentPlayer, gameState, handPos
  ** Output: Success or Failure
  ***********************************************************/
