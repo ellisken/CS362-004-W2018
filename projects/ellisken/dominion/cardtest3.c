@@ -119,6 +119,10 @@ int main(){
         printf("---TEST 3 passed---\n");
         success_ct++;}
 
+    //Tally results
+    if(success_ct == 3) printf("\nAll tests passed. SUCCESS.\n");
+    else printf("\nAt least one test failed. Please review results.\n");
+
 
     return 0;
 }
