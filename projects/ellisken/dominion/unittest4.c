@@ -45,6 +45,9 @@ int main(){
     int seed = 3; //For randomizing shuffling result
     struct gameState state, testState;
 
+    //Print title
+    printf("\n\nUnit Test 4: scoreFor()\n\n");
+
     initializeGame(playerCount, k, seed, &state); 
 
     //TEST 1 - Manually test and compare score from deck based on deck at game

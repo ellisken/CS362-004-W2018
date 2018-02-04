@@ -28,6 +28,9 @@ int main(){
     int test_k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy, council_room};
     struct gameState state, testState;
 
+    //Print title
+    printf("\n\nCard Test 1: cardSmithy()\n\n");
+
     //Initialize game state
     initializeGame(playerCount, k, seed, &state);
     printf("\nGame Initialized\n");

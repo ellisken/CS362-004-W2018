@@ -36,6 +36,9 @@ int main(){
     int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy, council_room};
     struct gameState state, testState;
 
+    //Print title
+    printf("\n\nCard Test 4: great hall\n\n");
+
     //Initialize game state
     initializeGame(playerCount, k, seed, &state);
 
