@@ -70,7 +70,7 @@ int main(){
     if(testState.handCount[player2] == state.handCount[player2]){
         printf("---TEST 3 for new handCount (same) Successful---\n");
         success_ct++;}
-    else printf("---TEST 23 failed for handCount state preservation, player 2---\n");
+    else printf("---TEST 3 failed for handCount state preservation, player 2---\n");
     
     printf("Deck count initial (test): %i, deck count after play (test) %i\n", deck_ct2, testState.deckCount[player2]);
     if(testState.deckCount[player2] == state.deckCount[player2]){
