@@ -49,6 +49,7 @@ int main(){
 
     //TEST 1 - Manually test and compare score from deck based on deck at game
     //start
+    printf("i\n\nTEST 1: Compare manual score count with scoreFor() result\n\n");
     for(i=0; i < playerCount; i++){
         //Get manual score
         man_card_ct = 0;
@@ -98,15 +99,88 @@ int main(){
         else printf("---TEST 1 failed for player %i---\n", i);
     }
 
+
+
     //TEST 2 - Create test state and change values in test. Compare score with
     //original state
+    printf("\n\nTEST 2: Change card counts for first player in test state and compare\n\n");
+
+    memcpy(&testState, &state, sizeof(struct gameState));//Copy into test state for comparison
+
+    //Erase all cards for player 1
+    testState.deckCount[player1] = 0;
+    testState.handCount[player1] = 0;
+    testState.discardCount[player1] = 0;
+
+    //Give player 1 a copy of each card that affects score for deck, hand, and
+    //discard
+    for(j=0; j < 6; j++){
+        if(j==0){
+            testState.deck[player1][j] = curse;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = curse;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = curse;
+            testState.handCount[player1]++;}
+
+        else if(j==1){
+            testState.deck[player1][j] = estate;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = estate;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = estate;
+            testState.handCount[player1]++;}
+
+        else if(j==2){
+            testState.deck[player1][j] = duchy;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = duchy;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = duchy;
+            testState.handCount[player1]++;}
+
+        else if(j==3){
+            testState.deck[player1][j] = province;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = province;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = province;
+            testState.handCount[player1]++;}
+
+        else if(j==4){
+            testState.deck[player1][j] = great_hall;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = great_hall;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = great_hall;
+            testState.handCount[player1]++;}
+
+        else if(j==5){
+            testState.deck[player1][j] = gardens;
+            testState.deckCount[player1]++;
+            testState.hand[player1][j] = gardens;
+            testState.handCount[player1]++;
+            testState.deck[player1][j] = gardens;
+            testState.handCount[player1]++;}
+    }
+
+    //Compare testState to state
+    int testState_exp = 66; // 6 cards * (-1+1+3+6+1) + floor(18cards/10)*6
+    int state_exp = 3; //From TEST 1
+
+    printf("scoreFor testState Player 1 EXPECTED: %i\n", testState_exp);
+    printf("scoreFor testState Player 1 ACTUAL: %i\n", scoreFor(player1, &testState));
+    printf("scoreFor state Player 1 EXPECTED: %i\n", state_exp);
+    printf("scoreFor testState Player 1 ACTUAL: %i\n", scoreFor(player1, &state));
+
+    if(scoreFor(player1, &testState) == (scoreFor(player1, &state)+(testState_exp - state_exp))){
+        printf("---TEST 2 success---\n");
+        success_ct++;}
+    else printf("---TEST 2 failure---\n");
 
 
-
-
-
-
-
+    if(success_ct == 2) printf("\nALL tests passed. SUCCESS.\n");
+    else printf("\nAt least one test failed. Please review results.\n");
 
 
     return 0;
