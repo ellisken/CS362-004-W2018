@@ -31,21 +31,21 @@ runtests: testDrawCard
 
 unittest: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
 	./unittest1 &> unittestresult.out
-	gcov dominion.c -f >> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./unittest2 &>> unittestresult.out
-	gcov dominion.c -f >> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./unittest3 &>> unittestresult.out
-	gcov dominion.c -f >> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./unittest4 &>> unittestresult.out
-	gcov dominion.c -f >> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./cardtest1 &>> unittestresult.out
-	gcov dominion.c -f>> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./cardtest2 &>> unittestresult.out
-	gcov dominion.c -f>> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./cardtest3 &>> unittestresult.out
-	gcov dominion.c -f>> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	./cardtest4 &>> unittestresult.out
-	gcov dominion.c -f>> unittestresult.out
+	gcov dominion.c -fb >> unittestresult.out
 	
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
