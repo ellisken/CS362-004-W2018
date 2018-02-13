@@ -119,14 +119,21 @@ int main(){
             exit(1);}
 
         //TEST 3: Check top two hand cards are now Treasure cards
-        
+        card1 = testState.hand[player1][testState.handCount[player1]-1];
+        card2 = testState.hand[player1][testState.handCount[player1]-2];
+        if(card1 != gold || card1 != silver || card1 != copper)
+            printf("Error: top card is not Treasure. Top card: %i\n", card1);
+        if(card2 != gold || card2 != silver || card2 != copper)
+            printf("Error: 2nd from top card is not Treasure. 2nd from top card: %i\n", card2);
 
         //TEST 4: Check state has not changed for other player
-
+        if(testState.handCount[player2] != state.handCount[player2])
+            printf("Error - handCount was changed for player2");
+        if(testState.deckCount[player2] != state.deckCount[player2])
+            printf("Error - deckCount was changed for player2");
+        if(testState.discardCount[player2] != state.discardCount[player2])
+            printf("Error - discardCount was changed for player2");
     }
-
-
-
 
     return 0;
 }
