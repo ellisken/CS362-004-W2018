@@ -19,7 +19,8 @@
 
 int main(){
     //Variables
-    int i, j;
+    int i, j, m;
+    m = 0;
     int playerCount = 2;
     int player1 = 0;
     int player2 = 1;
@@ -44,7 +45,7 @@ int main(){
 
     //Invoke initializeGame() to create game state
     //for 2 players
-    printf("Initializing game\n");
+    printf("Initializing game\n\n\n");
     initializeGame(playerCount, k, seed, &state);
 
     
@@ -70,25 +71,25 @@ int main(){
 
         //Print initial values for drawnTreasure,
         //size of deck, size of hand, and size of discard
-        printf("Initial Deck: %i\t", state.deckCount[player1]);
-        printf("Initial Hand: %i\t", state.handCount[player1]);
+        printf("\n(%i)Initial Deck: %i\t", m++, state.deckCount[player1]);
+        printf("Initial Hand: %i\t\t", state.handCount[player1]);
         printf("Initial Discard: %i\n", state.discardCount[player1]);
         
         //Check deck and discard piles for treasure
         //If treasure cards < 2, exit and assert
-        treasure = 0;
+        /*treasure = 0;
         for(i=0; i < deckCt; i++){
             card = state.deck[player1][i];
             if(card == gold || card == silver || card == copper)
                 treasure++;}
-        for(i=0; i < discardCt; i++){
+        /*for(i=0; i < discardCt; i++){
             card = state.discard[player1][i];
             if(card == gold || card == silver || card == copper)
-                treasure++;}
+                treasure++;}*/
 
-        if(treasure < 3){
-            printf("---No treasure in deck - results in SEGMENTATION FAULT----\n");
-            exit(1);}
+        /*if(treasure < 3){
+            printf("---Not enough treasure in deck - results in SEGMENTATION FAULT----\n");
+            exit(1);}*/
 
 
         //Else, make copy of state and
@@ -97,42 +98,50 @@ int main(){
         memcpy(&testState, &state, sizeof(struct gameState));
 
         printf("Playing Adventurer card.\n");
-        drawnTreasure = 0;
-        z = 0;
+        z = 0; //Reset the value of z
         cardAdventurer(drawnTreasure, &testState, player1, cardDrawn, temphand, z);
 
 
         //Print resulting values for drawnTreasure, hand count
         printf("Adventurer card played.\n");
-        printf("drawnTreasure: %i\t", drawnTreasure);
-        printf("Resulting Hand Count: %i\t", testState.handCount[player1]);
+        printf("Resulting drawnTreasure: %i\n", drawnTreasure);
+        printf("Resulting Hand Count: %i\n", testState.handCount[player1]);
 
 
         //TEST 1: Check drawnTreasure has increased by two
-        if(drawnTreasure != 2){
+        /*if(drawnTreasure != 2){
             printf("Error: drawnTreasure != 2 after play.\n");
-            exit(1);}
+            exit(1);}*/
 
         //TEST 2: Check hand count has increased by two
         if(testState.handCount[player1] != state.handCount[player1] + 2){
-            printf("Error: handCount should have increased by exactly 2.\n");
+            printf("\nError: handCount should have increased by exactly 2.\n");
             exit(1);}
 
         //TEST 3: Check top two hand cards are now Treasure cards
         card1 = testState.hand[player1][testState.handCount[player1]-1];
         card2 = testState.hand[player1][testState.handCount[player1]-2];
-        if(card1 != gold || card1 != silver || card1 != copper)
-            printf("Error: top card is not Treasure. Top card: %i\n", card1);
-        if(card2 != gold || card2 != silver || card2 != copper)
-            printf("Error: 2nd from top card is not Treasure. 2nd from top card: %i\n", card2);
+        printf("Top card in hand: %i\n", card1);
+        printf("Second from the top card in hand: %i\n", card2);
+        if(card1 != gold && card1 != silver && card1 != copper){
+            printf("\nError: top card is not Treasure. Top card: %i\n", card1);
+            exit(1);}
+        if(card2 != gold && card2 != silver && card2 != copper){
+            printf("\nError: 2nd from top card is not Treasure. 2nd from top card: %i\n", card2);
+            exit(1);}
 
         //TEST 4: Check state has not changed for other player
-        if(testState.handCount[player2] != state.handCount[player2])
-            printf("Error - handCount was changed for player2");
-        if(testState.deckCount[player2] != state.deckCount[player2])
-            printf("Error - deckCount was changed for player2");
-        if(testState.discardCount[player2] != state.discardCount[player2])
-            printf("Error - discardCount was changed for player2");
+        if(testState.handCount[player2] != state.handCount[player2]){
+            printf("\nError - handCount was changed for player2");
+            exit(1);}
+        if(testState.deckCount[player2] != state.deckCount[player2]){
+            printf("\nError - deckCount was changed for player2");
+            exit(1);}
+        if(testState.discardCount[player2] != state.discardCount[player2]){
+            printf("\nError - discardCount was changed for player2");
+            exit(1);}
+
+        printf("\nAll tests passed for iteration %i\n", m-1);
     }
 
     return 0;
