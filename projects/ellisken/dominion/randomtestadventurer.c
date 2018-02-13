@@ -33,6 +33,7 @@ int main(){
     int deckCt; //For testing different draw deck sizes, randomly generated
     int discardCt, card; //Randomly generated each test
     int treasure; //Flag used when checking piles for treasure
+    int card1, card2; //To store top two cards from hand during tests
 
     //Print title
     printf("\n\nRandom Test: ADVENTURER\n\n");
@@ -47,69 +48,82 @@ int main(){
     initializeGame(playerCount, k, seed, &state);
 
     
-    //For each deck count of 0, 1, 2, 250, and 500:
-    deckCt = rand() % (MAX_HAND + 1);
-    discardCt = rand() % (MAX_HAND + 1); //Generate random discard count
+    //Continually generate random deck and discard piles
+    //and play Adventurer until failure
+    while(1){
+        deckCt = rand() % (MAX_HAND + 1);
+        discardCt = rand() % (MAX_HAND + 1); //Generate random discard count
 
-    //Change state discard and deck numbers for player 1
-    state.deckCount[player1] = deckCt;
-    state.discardCount[player1] = discardCt;
+        //Change state discard and deck numbers for player 1
+        state.deckCount[player1] = deckCt;
+        state.discardCount[player1] = discardCt;
 
-    //Fill player 1 deck and discard with randomly selected cards
-    for(j=0; j < deckCt; j++){
-        card = rand() % 27; //Cards are numbered 0 through 26
-        state.deck[player1][j] = card;}
+        //Fill player 1 deck and discard with randomly selected cards
+        for(j=0; j < deckCt; j++){
+            card = rand() % 27; //Cards are numbered 0 through 26
+            state.deck[player1][j] = card;}
 
-    for(j=0; j < discardCt; j++){
-        card = rand() % 27;
-        state.discard[player1][j] = card;}
-
-
-    //Print initial values for drawnTreasure,
-    //size of deck, size of hand, and size of discard
-    printf("Initial Deck: %i\t", state.deckCount[player1]);
-    printf("Initial Hand: %i\t", state.handCount[player1]);
-    printf("Initial Discard: %i\n", state.discardCount[player1]);
-    
-    //Check deck and discard piles for treasure
-    //If treasure cards < 2, exit and assert
-    treasure = 0;
-    for(i=0; i < deckCt; i++){
-        card = state.deck[player1][i];
-        if(card == gold || card == silver || card == copper)
-            treasure++;}
-    for(i=0; i < discardCt; i++){
-        card = state.discard[player1][i];
-        if(card == gold || card == silver || card == copper)
-            treasure++;}
-
-    if(treasure < 3) printf("No treasure in deck - results in SEGMENTATION FAULT");
+        for(j=0; j < discardCt; j++){
+            card = rand() % 27;
+            state.discard[player1][j] = card;}
 
 
-    //Else, make copy of state and
-    //play adventurer with test copy
-    printf("Copying state into testState\n");
-    memcpy(&testState, &state, sizeof(struct gameState));
+        //Print initial values for drawnTreasure,
+        //size of deck, size of hand, and size of discard
+        printf("Initial Deck: %i\t", state.deckCount[player1]);
+        printf("Initial Hand: %i\t", state.handCount[player1]);
+        printf("Initial Discard: %i\n", state.discardCount[player1]);
+        
+        //Check deck and discard piles for treasure
+        //If treasure cards < 2, exit and assert
+        treasure = 0;
+        for(i=0; i < deckCt; i++){
+            card = state.deck[player1][i];
+            if(card == gold || card == silver || card == copper)
+                treasure++;}
+        for(i=0; i < discardCt; i++){
+            card = state.discard[player1][i];
+            if(card == gold || card == silver || card == copper)
+                treasure++;}
 
-    printf("Playing Adventurer card.\n");
-    cardAdventurer(drawnTreasure, &testState, player1, cardDrawn, temphand, z);
+        if(treasure < 3){
+            printf("---No treasure in deck - results in SEGMENTATION FAULT----\n");
+            exit(1);}
 
 
-    //Print resulting values for drawnTreasure,
-    //size of deck, and size of discard
-    printf("Adventurer card played.\n");
-    
+        //Else, make copy of state and
+        //play adventurer with test copy
+        printf("Copying state into testState\n");
+        memcpy(&testState, &state, sizeof(struct gameState));
+
+        printf("Playing Adventurer card.\n");
+        drawnTreasure = 0;
+        z = 0;
+        cardAdventurer(drawnTreasure, &testState, player1, cardDrawn, temphand, z);
 
 
-    //TEST 1: Check drawnTreasure has increased by two
-
-    //TEST 2: Check hand count has increased by two
-
-    //TEST 3: Check top two hand cards are now Treasure cards
-
-    //TEST 4: Check state has not changed for other player
+        //Print resulting values for drawnTreasure, hand count
+        printf("Adventurer card played.\n");
+        printf("drawnTreasure: %i\t", drawnTreasure);
+        printf("Resulting Hand Count: %i\t", testState.handCount[player1]);
 
 
+        //TEST 1: Check drawnTreasure has increased by two
+        if(drawnTreasure != 2){
+            printf("Error: drawnTreasure != 2 after play.\n");
+            exit(1);}
+
+        //TEST 2: Check hand count has increased by two
+        if(testState.handCount[player1] != state.handCount[player1] + 2){
+            printf("Error: handCount should have increased by exactly 2.\n");
+            exit(1);}
+
+        //TEST 3: Check top two hand cards are now Treasure cards
+        
+
+        //TEST 4: Check state has not changed for other player
+
+    }
 
 
 
