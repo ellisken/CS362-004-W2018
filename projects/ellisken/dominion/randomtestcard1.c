@@ -2,7 +2,7 @@
  ** Program Filename: randomtestcard1.c
  ** Author: Kendra Ellis, ellisken@oregonstate.edu
  ** Date: February 15, 2018
- ** Description: unit test for playing Villager from dominion.c
+ ** Description: unit test for playing Great Hall from dominion.c
  **     using a random input generator
  ** Input:
  ** Output:
@@ -32,18 +32,11 @@ int main(){
     struct gameState state, testState;
 
     //Print title
-    printf("\n\nrandomtestcard1: VILLAGE\n\n");
+    printf("\n\nrandomtestcard1: GREAT HALL\n\n");
 
     //Seed PRNG
     srand(time(NULL));
 
-
-    /*//Invoke initializeGame() to create game state
-    //for 2 players
-    printf("Initializing game\n\n\n");
-    initializeGame(playerCount, k, seed, &state);*/
-
-    
     //Continually generate random currentPlayer
     //and handPos and play village 1000 times
     //NOTE: while loop easily modified to run
@@ -104,8 +97,8 @@ int main(){
             printf("\nError: handCount should have stayed the same.\n");
             exit(1);}
 
-        //TEST 2: Check numActions increased by 2
-        if(testState.numActions != state.numActions + 2){
+        //TEST 2: Check numActions increased by 1
+        if(testState.numActions != state.numActions + 1){
             printf("\nError: numActions did not increase.\n");
             exit(1);}
 
