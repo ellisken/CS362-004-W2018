@@ -31,7 +31,7 @@ runtests: testDrawCard
 
 randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
-	./randomtestadventurer &> randomtestadventurer.out
+	./randomtestadventurer &> randomtestadventurer.out || true
 	gcov dominion.c -fb >> randomtestadventurer.out
 
 randomtestcard1.out: randomtestcard1.c dominion.o rngs.o
