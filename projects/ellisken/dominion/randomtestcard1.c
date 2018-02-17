@@ -78,9 +78,9 @@ int main(){
         printf("Copying state into testState\n");
         memcpy(&testState, &state, sizeof(struct gameState));
 
-        //Play Village with test state
-        printf("Playing Village card.\n\n");
-        cardEffect(village, c1, c2, c3, &testState, handPos, bonus);
+        //Play Great Hall with test state
+        printf("Playing Great Hall card.\n\n");
+        cardEffect(great_hall, c1, c2, c3, &testState, handPos, bonus);
 
         //Print resulting values for size of hand,
         //action count, played card count, and top of played

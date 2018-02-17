@@ -77,19 +77,19 @@ int main(){
         
         //Check deck and discard piles for treasure
         //If treasure cards < 2, exit and assert
-        /*treasure = 0;
+        treasure = 0;
         for(i=0; i < deckCt; i++){
             card = state.deck[player1][i];
             if(card == gold || card == silver || card == copper)
                 treasure++;}
-        /*for(i=0; i < discardCt; i++){
+        for(i=0; i < discardCt; i++){
             card = state.discard[player1][i];
             if(card == gold || card == silver || card == copper)
-                treasure++;}*/
+                treasure++;}
 
-        /*if(treasure < 3){
+        if(treasure < 2){
             printf("---Not enough treasure in deck - results in SEGMENTATION FAULT----\n");
-            exit(1);}*/
+            exit(1);}
 
 
         //Else, make copy of state and
