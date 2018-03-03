@@ -122,15 +122,15 @@ int main(){
 
         for(j=0; j < hc; j++){
             if(testState.hand[player2][j] != testState.hand[player2][j]){
-                printf("---TEST 6 failed hand check---\n", i);
+                printf("---TEST 6 failed hand check---\n");
                 result = 0;}}
         for(j=0; j < dc; j++){
             if(testState.deck[player2][j] != testState.deck[player2][j]){
-                printf("---TEST 6 failed deck check---\n", i);
+                printf("---TEST 6 failed deck check---\n");
                 result = 0;}}
         for(j=0; j < dis; j++){
             if(testState.discard[player2][j] != testState.discard[player2][j]){
-            printf("---TEST 6 failed discard check---\n", i);
+            printf("---TEST 6 failed discard check---\n");
             result = 0;}}
     
     

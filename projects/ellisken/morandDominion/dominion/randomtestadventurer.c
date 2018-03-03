@@ -96,7 +96,6 @@ int main(){
         memcpy(&testState, &state, sizeof(struct gameState));
 
         printf("Playing Adventurer card.\n");
-        z = 0; //Reset the value of z
         adventurerEffect(drawnTreasure, &testState, player1, temphand);
 
 
