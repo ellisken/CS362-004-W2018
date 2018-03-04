@@ -76,12 +76,12 @@ randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o
 
 randomtestcard1.out: randomtestcard1.c dominion.o rngs.o
 	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
-	./randomtestcard1 &> randomtestcard1.out
+	./randomtestcard1 &> randomtestcard1.out || true
 	gcov dominion.c -fb >> randomtestcard1.out
 
 randomtestcard2.out: randomtestcard2.c dominion.o rngs.o
 	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
-	./randomtestcard2 &> randomtestcard2.out
+	./randomtestcard2 &> randomtestcard2.out || true
 	gcov dominion.c -fb >> randomtestcard2.out
 
 player: player.c interface.o

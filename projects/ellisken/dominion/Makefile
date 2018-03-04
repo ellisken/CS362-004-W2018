@@ -29,11 +29,22 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+cardtest2: cardtest2.c dominion.o rngs.o
+		gcc -o cardtest2 -g cardtest2.c dominion.o rngs.o $(CFLAGS)
+		./cardtest2 &> cardtest2.out || true
+		gcov dominion.c -fb >> cardtest2.out
+
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+		gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+		./randomtestadventurer &> randomtestadventurer.out || true
+		gcov dominion.c -fb >> randomtestadventurer.out
+
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-all: playdom player testDrawCard testBuyCard badTestDrawCard
+
+all: playdom player testDrawCard testBuyCard badTestDrawCard cardtest1 cardtest2 randomtestadventurer
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player cardtest2 player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
