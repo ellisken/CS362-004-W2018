@@ -71,10 +71,7 @@ int main(){
     printf("drawnTreasure before: %i, drawnTreasure after: %i\n", drawnTreasure1, drawnTreasure2);
     printf("deck count player 1 before: %i, after: %i\n", deckCount_b4, testState.deckCount[player1]);
     printf("Top card is now: %i\n", testState.deck[player1][testState.deckCount[player1]-1]);//Check top card
-    if(drawnTreasure2 == 2 && testState.deckCount[player1] == state.deckCount[player1] - 2){
-        printf("---TEST 1 Successful---\n\n");
-        success_ct++;}
-    else printf("---TEST 1 Failed - either drawnTreasure != 2 || 2 cards were not drawn from player 1's deck---\n\n");
+   // assert(drawnTreasure2 == 2 && testState.deckCount[player1] == state.deckCount[player1] - 2);
 
 
 
@@ -119,44 +116,31 @@ int main(){
     deckCount = testState.discardCount[player1];
     printf("Top of player 1's discard pile is: %i\n", testState.discard[player1][deckCount-1]);
     printf("Second from top is: %i\n", testState.discard[player1][deckCount-2]);
-    if(testState.discard[player1][deckCount-1] == gardens && testState.discard[player1][deckCount-2] == sea_hag){
-        printf("---TEST 2 Successful---\n");
-        success_ct++;}
-    else printf("---TEST 2 Failed---\n");
+    assert(testState.discard[player1][deckCount-1] == gardens && testState.discard[player1][deckCount-2] == sea_hag);
 
     
     
     //TEST 3 - Check that game state did not change for player 2
     //by checking deck, hand, and discard unchanged
     printf("\n\nTEST 3: Test game state unchanged for other players (player 2)\n\n");
-    if(testState.handCount[player2] == state.handCount[player2]){
-        printf("---TEST 3 for handCount Successful---\n");
-        success_ct++;}
-    else printf("---TEST 3 for handCount Failed---\n");
+    assert(testState.handCount[player2] == state.handCount[player2]);
     
-    if(testState.deckCount[player2] == state.deckCount[player2]){
-        printf("---TEST 3 for deckCount Successful---\n");
-        success_ct++;}
-    else printf("---TEST 3 for deckCount Failed---\n");
+    assert(testState.deckCount[player2] == state.deckCount[player2]);
     
-    if(testState.discardCount[player2] == state.discardCount[player2]){
-        printf("---TEST 3 for discardCount Successful---\n");
-        success_ct++;}
-    else printf("---TEST 3 for discardCount Failed---\n");
+    assert(testState.discardCount[player2] == state.discardCount[player2]);
 
 
     //TEST 4 - Check that Kingdom pile has not changed
     printf("\n\nTEST 4: Check Kingdom pile unchanged\n\n");
     for(i=0; i < 10; i++){
-        if(k[i] != test_k[i]) printf("--TEST 4 failed for k[%i]---\n", i);
-        else{printf("---TEST 4 successful for k[%i]---\n", i);
-            success_ct++;}
+        assert(k[i] != test_k[i]);
     }
 
 
     //Tally successes
-    if(success_ct == 15) printf("\nAll tests passed. SUCCESS.\n");
-    else printf("\nAt least one test failed. Please review results.\n");
+    //if(success_ct == 15) printf("\nAll tests passed. SUCCESS.\n");
+    //else printf("\nAt least one test failed. Please review results.\n");
+    assert(success_ct == 15);
 
     return 0;
 }
