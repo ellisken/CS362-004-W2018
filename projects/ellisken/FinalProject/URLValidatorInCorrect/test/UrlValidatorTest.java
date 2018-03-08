@@ -87,17 +87,27 @@ public class UrlValidatorTest extends TestCase {
            passed++;
        }
 
-       //9.  No port, path, query
+       //9. No port, yes path and query
        url = "http://www.google.com/test1/?action=true";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
-       //No port, yes path and query
-       //No port or path, yes query
-       //No port, yes path, no query
-       //Yes port, no path, yes query
+
+       //10. Yes port, no path, yes query
+       url = "http://www.google.com:80?action=true";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
        //Yes port, yes path, no query
+       url = "http://www.google.com:80/test1";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       
+       }
        //Boundary: non-ascii, 
        //empty scheme
        //empty auth
