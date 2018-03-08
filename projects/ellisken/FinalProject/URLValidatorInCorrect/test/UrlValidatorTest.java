@@ -12,105 +12,83 @@ public class UrlValidatorTest extends TestCase {
       super(testName);
    }
 
-   
+	private boolean compareResult(String url, boolean expected, boolean result){
+        if (result == expected) {
+			System.out.println(url + " resulted in " + result);
+			return true;
+        }
+		System.out.println("UNEXPECTED: " + url + " resulted in " + result);
+		return false;
+	}
+
    //Manual tests of isValid() method
    public void testManualTest_1()
    {
-	   int passed = 0; //Used to indicate all tests passed
-	   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
-	   
-	   //Print title
-	   System.out.println("\n-----MANUAL TESTS-----\n");
-	   
-	   //Test valid url Scheme + Auth
-	   boolean expected = true;
-	   String url = "http://www.google.com";
-	   boolean result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
-		
+       int passed = 0; //Used to indicate all tests passed
+       //UrlValidatorTest testObj = new UrlValidatorTest("url test");
+       UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
 
-	   
-	   //Test same valid Scheme + different valid Auth
-	   expected = true;
-	   url = "http://go.au";
-	   result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
+       //Print title
+       System.out.println("\n-----MANUAL TESTS-----\n");
 
-	   //Test valid Scheme +  valid Auth + valid Port
-	   expected = true;
-	   url = "http://www.google.com:0";
-	   result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
-	   
-	   //Test valid Scheme +  valid Auth + valid Path
-	   expected = true;
-	   url = "http://www.google.com/test123";
-	   result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
-	   
-	   //Test valid Scheme +  valid Auth + valid Query
-	   expected = true;
-	   url = "http://www.google.com?action=view";
-	   result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
-	   
-	   
-	   //Test invalid Scheme + valid Auth
-	   expected = false;
-	   url = "3ht://www.google.com";
-	   result = urlVal.isValid(url);
-	   if(result == true)
-		   System.out.println("UNEXPECTED: " + url + " resulted in true.");
-	   else {
-		   System.out.println(url + " resulted in false");
-		   passed++;
-		   }
-	
-	   
-	   //Test invalid Scheme + invalid Auth
-	   expected = false;
-	   url = "3ht://1.2.3.4.5";
-	   result = urlVal.isValid(url);
-	   if(result == true)
-		   System.out.println("UNEXPECTED: " + url + " resulted in true.");
-	   else {
-		   System.out.println(url + " resulted in false");
-		   passed++;
-		   }
+       //Test valid url Scheme + Auth
+       String url = "http://www.google.com";
+       boolean result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
 
-	   
-	   //Test another valid Scheme + valid Auth
-	   expected = true;
-	   url = "ftp://go.au";
-	   result = urlVal.isValid(url);
-	   if(result == true) {
-		   System.out.println(url + " resulted in true.");
-		   passed++;
-		   }
-	   else System.out.println("UNEXPECTED: " + url + " resulted in false");
-	   
-	   //Check ending value of passed
-	   //assertEquals(passed, 6);
+       //Test same valid Scheme + different valid Auth
+       url = "http://go.au";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
+       //Test valid Scheme +  valid Auth + valid Port
+       url = "http://www.google.com:0";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
+       //Test valid Scheme +  valid Auth + valid Path
+       url = "http://www.google.com/test123";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
+       //Test valid Scheme +  valid Auth + valid Query
+       url = "http://www.google.com?action=view";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
+       //Test invalid Scheme + valid Auth
+       url = "3ht://www.google.com";
+       result = urlVal.isValid(url);
+       if (compareResult(url, false, result)) {
+           passed++;
+       }
+
+       //Test invalid Scheme + invalid Auth
+       url = "3ht://1.2.3.4.5";
+       result = urlVal.isValid(url);
+       if (compareResult(url, false, result)) {
+           passed++;
+       }
+
+       //Test another valid Scheme + valid Auth
+       url = "ftp://go.au";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+
+       //Check ending value of passed
+       //assertEquals(passed, 6);
 	 
 	   
    }
