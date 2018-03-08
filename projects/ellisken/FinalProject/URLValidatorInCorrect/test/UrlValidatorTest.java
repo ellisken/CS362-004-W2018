@@ -31,64 +31,79 @@ public class UrlValidatorTest extends TestCase {
        //Print title
        System.out.println("\n-----MANUAL TESTS-----\n");
 
-       //Test valid url Scheme + Auth
+       //1. Test valid url Scheme + Auth
        String url = "http://www.google.com";
        boolean result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
-       //Test same valid Scheme + different valid Auth
+       //2. Test same valid Scheme + different valid Auth
        url = "http://go.au";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
-       //Test valid Scheme +  valid Auth + valid Port
+       //3. Test valid Scheme +  valid Auth + valid Port
        url = "http://www.google.com:0";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
-       //Test valid Scheme +  valid Auth + valid Path
+       //4. Test valid Scheme +  valid Auth + valid Path
        url = "http://www.google.com/test123";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
-       //Test valid Scheme +  valid Auth + valid Query
+       //5. Test valid Scheme +  valid Auth + valid Query
        url = "http://www.google.com?action=view";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
-       //Test invalid Scheme + valid Auth
+       //6. Test invalid Scheme + valid Auth
        url = "3ht://www.google.com";
        result = urlVal.isValid(url);
        if (compareResult(url, false, result)) {
            passed++;
        }
 
-       //Test invalid Scheme + invalid Auth
+       //7. Test invalid Scheme + invalid Auth
        url = "3ht://1.2.3.4.5";
        result = urlVal.isValid(url);
        if (compareResult(url, false, result)) {
            passed++;
        }
 
-       //Test another valid Scheme + valid Auth
+       //8. Test another valid Scheme + valid Auth
        url = "ftp://go.au";
        result = urlVal.isValid(url);
        if (compareResult(url, true, result)) {
            passed++;
        }
 
+       //9.  No port, path, query
+       url = "http://www.google.com/test1/?action=true";
+       result = urlVal.isValid(url);
+       if (compareResult(url, true, result)) {
+           passed++;
+       }
+       //No port, yes path and query
+       //No port or path, yes query
+       //No port, yes path, no query
+       //Yes port, no path, yes query
+       //Yes port, yes path, no query
+       //Boundary: non-ascii, 
+       //empty scheme
+       //empty auth
+
        //Check ending value of passed
-       //assertEquals(passed, 6);
+       assertEquals(passed, 8);
 	 
 	   
    }
