@@ -12,12 +12,12 @@ public class UrlValidatorTest extends TestCase {
       super(testName);
    }
 
-	private boolean compareResult(String url, boolean expected, boolean result){
+	private boolean compareResult(int test_num, String url, boolean expected, boolean result){
         if (result == expected) {
-			System.out.println(url + " resulted in " + result);
+			System.out.println("Test " + test_num + ": " + url + " resulted in " + result);
 			return true;
         }
-		System.out.println("UNEXPECTED: " + url + " resulted in " + result);
+		System.out.println("Test " + test_num + " UNEXPECTED: " + url + " resulted in " + result);
 		return false;
 	}
 
@@ -25,95 +25,136 @@ public class UrlValidatorTest extends TestCase {
    public void testManualTest_1()
    {
        int passed = 0; //Used to indicate all tests passed
-       //UrlValidatorTest testObj = new UrlValidatorTest("url test");
-       UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+       int test_ct = 0; //Used to track # of tests
+       String schemes[] = {"http", "https", "ftp"};
+       UrlValidator urlVal = new UrlValidator(schemes);
 
        //Print title
        System.out.println("\n-----MANUAL TESTS-----\n");
 
        //1. Test valid url Scheme + Auth
+       test_ct++;
        String url = "http://www.google.com";
        boolean result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //2. Test same valid Scheme + different valid Auth
+       test_ct++;
        url = "http://go.au";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //3. Test valid Scheme +  valid Auth + valid Port
+       test_ct++;
        url = "http://www.google.com:0";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //4. Test valid Scheme +  valid Auth + valid Path
+       test_ct++;
        url = "http://www.google.com/test123";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //5. Test valid Scheme +  valid Auth + valid Query
+       test_ct++;
        url = "http://www.google.com?action=view";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //6. Test invalid Scheme + valid Auth
+       test_ct++;
        url = "3ht://www.google.com";
        result = urlVal.isValid(url);
-       if (compareResult(url, false, result)) {
+       if (compareResult(test_ct, url, false, result)) {
            passed++;
        }
 
        //7. Test invalid Scheme + invalid Auth
+       test_ct++;
        url = "3ht://1.2.3.4.5";
        result = urlVal.isValid(url);
-       if (compareResult(url, false, result)) {
+       if (compareResult(test_ct, url, false, result)) {
            passed++;
        }
 
        //8. Test another valid Scheme + valid Auth
+       test_ct++;
        url = "ftp://go.au";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //9. No port, yes path and query
+       test_ct++;
        url = "http://www.google.com/test1/?action=true";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
        //10. Yes port, no path, yes query
+       test_ct++;
        url = "http://www.google.com:80?action=true";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
        }
 
-       //Yes port, yes path, no query
+       //11. Yes port, yes path, no query
+       test_ct++;
        url = "http://www.google.com:80/test1";
        result = urlVal.isValid(url);
-       if (compareResult(url, true, result)) {
+       if (compareResult(test_ct, url, true, result)) {
            passed++;
-       
        }
-       //Boundary: non-ascii, 
-       //empty scheme
-       //empty auth
+       
+       //12. Boundary: non-ascii
+       test_ct++;
+       url = "£¥©";
+       result = urlVal.isValid(url);
+       if (compareResult(test_ct, url, false, result)) {
+           passed++;
+       }
+       
+       //13. empty scheme
+       test_ct++;
+       url = "";
+       result = urlVal.isValid(url);
+       if (compareResult(test_ct, "[empty scheme]", false, result)) {
+           passed++;
+       }
+       
+       //14. empty auth
+       test_ct++;
+       url = "http:// ";
+       result = urlVal.isValid(url);
+       if (compareResult(test_ct, url, false, result)) {
+           passed++;
+       }
+       
+       //15. Test another valid Scheme + valid Auth (country TLD)
+       test_ct++;
+       url = "http://go.au";
+       result = urlVal.isValid(url);
+       if (compareResult(test_ct, url, true, result)) {
+           passed++;
+       }
 
        //Check ending value of passed
-       assertEquals(passed, 8);
+       //assertEquals(passed, 14);
+       assertEquals(passed, test_ct);
 	 
 	   
    }
@@ -190,23 +231,61 @@ public class UrlValidatorTest extends TestCase {
     */
    ResultPair[] testUrlScheme = {
 		   new ResultPair("http://", true),
-		   new ResultPair("http/", false)};
+		   new ResultPair("http/", false),
+           new ResultPair("ftp://", true),
+           new ResultPair("h3t://", true),
+           new ResultPair("3ht://", false),
+           new ResultPair("http:/", false),
+           new ResultPair("http:", false),
+           new ResultPair("://", false),
+           new ResultPair("", true)};
 
    ResultPair[] testUrlAuthority = {
 		   new ResultPair("go.com", true),
-		   new ResultPair("1.2.3", false)};
+		   new ResultPair("1.2.3", false),
+           new ResultPair("go.com", true),
+           new ResultPair("go.au", true),
+           new ResultPair("0.0.0.0", true),
+           new ResultPair("255.255.255.255", true),
+           new ResultPair("256.256.256.256", false),
+           new ResultPair("255.com", true),
+           new ResultPair("1.2.3.4.5", false),
+           new ResultPair("1.2.3.4.", false),
+           new ResultPair(".1.2.3.4", false),
+           new ResultPair("go.a", false),
+           new ResultPair("go.a1a", false),
+           new ResultPair("go.1aa", false),
+           new ResultPair("aaa.", false),
+           new ResultPair(".aaa", false),
+           new ResultPair("aaa", false),
+           new ResultPair("", false)};
    
    ResultPair[] testUrlPort = {
 		   new ResultPair(":80", true),
-		   new ResultPair(":-1", false)};
+		   new ResultPair(":-1", false),
+           new ResultPair(":65535", true),
+           new ResultPair(":0", true),
+           new ResultPair("", true),
+           new ResultPair(":65636",false),
+           new ResultPair(":65a", false)};
                             
    ResultPair[] testPath = {
 		   new ResultPair("/test1", true),
-		   new ResultPair("/..//file", false)};
+		   new ResultPair("/..//file", false),
+           new ResultPair("/t123", true),
+           new ResultPair("/$23", true),
+           new ResultPair("/..", false),
+           new ResultPair("/../", false),
+           new ResultPair("/test1/", true),
+           new ResultPair("", true),
+           new ResultPair("/test1/file", true),
+           new ResultPair("/test1//file", false)};
    
    ResultPair[] testUrlQuery = {
 		   new ResultPair("?action=view", true),
-		   new ResultPair("?action=??=&view&?", false)};
+		   new ResultPair("?action=??=&view&?", false),
+           new ResultPair("?action=edit&mode=up", true),
+           new ResultPair("", true)};
 
    Object[] testUrlParts = {testUrlScheme, testUrlAuthority, testUrlPort, testPath, testUrlQuery};
 
