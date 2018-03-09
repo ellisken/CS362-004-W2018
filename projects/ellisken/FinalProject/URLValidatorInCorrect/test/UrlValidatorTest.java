@@ -1,5 +1,7 @@
 
 
+import java.util.Objects;
+
 import junit.framework.TestCase;
 
 //You can use this as a skeleton for your 3 different test approach
@@ -12,7 +14,12 @@ public class UrlValidatorTest extends TestCase {
       super(testName);
    }
 
-	private boolean compareResult(int test_num, String url, boolean expected, boolean result){
+   /*compareResult() is used in our manual tests
+    * to print each test's results to the console
+    * Inputs: int test_num - the current test's number, boolean expected - the
+    * expected isValid() return based on input, boolean result - the actual return
+    * value of isValid() for that test*/
+   private boolean compareResult(int test_num, String url, boolean expected, boolean result){
         if (result == expected) {
 			System.out.println("Test " + test_num + ": " + url + " resulted in " + result);
 			return true;
@@ -20,14 +27,61 @@ public class UrlValidatorTest extends TestCase {
 		System.out.println("Test " + test_num + " UNEXPECTED: " + url + " resulted in " + result);
 		return false;
 	}
+	
+   
+   
+   /*isolateParTest() is used on our last test where urls are auto-generated.
+    * Inputs: String url_fragment - a valid url fragment that will be appended
+    * to all items in the array for the isolated part, ResultPair[] test_parts - 
+    * the array that contains test values for the isolated part, String part - the
+    * name of the current part under test*/
+   private void isolatePartTest(String url_fragment, ResultPair[] test_parts, String part) {
+	   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+	   boolean expected;
+	   boolean actual;
+	   String url;
+	   int test_ct;
+	   int fail_ct;
+	   test_ct = 0;
+	   fail_ct = 0;
+	   
+       //Print title
+       System.out.println("\n-----AUTO-GENERATED TESTS: " + part + "-----\n");
+	   
+	   //For each ResultPair in the given part array
+	   for(int i=0; i < test_parts.length-1; i++) {
+		   test_ct++;
+		   
+		   //Append part to the url_fragment
+		   if(Objects.equals(part, "scheme")) {
+		   url = test_parts[i].item + url_fragment;}
+		   else url = url_fragment + test_parts[i].item;
+		   expected = test_parts[i].valid; //Set expected based on part
+	       actual = urlVal.isValid(url);
+	       
+	       if(expected != actual) {
+	    	   fail_ct++;
+	    	   System.out.print("ERROR ");
+	    	   System.out.println("URL tested: " + url);
+	    	   System.out.println("Expected: " + expected);
+	    	   System.out.println("Actual: " + actual);
+	    	   System.out.print('\n');}
+	   }
+	   
+	   System.out.println("SUMMARY for " + part);
+	   System.out.println("Tests run: " + test_ct);
+	   System.out.println("Failures: " + fail_ct);
+	   System.out.println("% passed: " + (test_ct - fail_ct)/test_ct + "\n"); 
+   }
 
+   
+   
    //Manual tests of isValid() method
-   public void testManualTest_1()
+   public void testManualTest()
    {
        int passed = 0; //Used to indicate all tests passed
        int test_ct = 0; //Used to track # of tests
-       String schemes[] = {"http", "https", "ftp"};
-       UrlValidator urlVal = new UrlValidator(schemes);
+       UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
 
        //Print title
        System.out.println("\n-----MANUAL TESTS-----\n");
@@ -98,7 +152,7 @@ public class UrlValidatorTest extends TestCase {
 
        //9. No port, yes path and query
        test_ct++;
-       url = "http://www.google.com/test1/?action=true";
+       url = "http://www.google.com/test1/?action=view";
        result = urlVal.isValid(url);
        if (compareResult(test_ct, url, true, result)) {
            passed++;
@@ -106,7 +160,7 @@ public class UrlValidatorTest extends TestCase {
 
        //10. Yes port, no path, yes query
        test_ct++;
-       url = "http://www.google.com:80?action=true";
+       url = "http://www.google.com:80?action=view";
        result = urlVal.isValid(url);
        if (compareResult(test_ct, url, true, result)) {
            passed++;
@@ -153,7 +207,6 @@ public class UrlValidatorTest extends TestCase {
        }
 
        //Check ending value of passed
-       //assertEquals(passed, 14);
        assertEquals(passed, test_ct);
 	 
 	   
@@ -213,15 +266,30 @@ public class UrlValidatorTest extends TestCase {
 	   }
    }
    
-
+   /*Tests Generated URLs determined as follows:
+   * Calls isolatePartTest for each of the 5 parts in order, passing
+   * in a url_fragment made up of all valid parts not including the 
+   * isolated part. */
    public void testIsValid()
    {
-	   //You can use this function for programming based testing
-
+	   //Test Scheme w/valid Auth
+	   isolatePartTest("www.google.com", testUrlScheme, "scheme");
+	   
+	   //Test Auth w/valid scheme
+	   isolatePartTest("https://", testUrlScheme, "authority");
+	   
+	   //Test Port w/valid scheme+auth
+	   isolatePartTest("https://www.google.com", testUrlScheme, "port");
+	   
+	   //Test Path w/valid scheme+auth+port
+	   isolatePartTest("https://www.google.com:80", testUrlScheme, "path");
+	   
+	   //Test Query w/valid scheme+auth+port+path
+	   isolatePartTest("https://www.google.com:80/test123", testUrlScheme, "query");
    }
    
    
-   /*Data declarations for Partition and Programmatic tests
+   /*Data declarations for Partition and Programmed tests
     * The data given below approximates the 4 parts of a URL
     * <scheme>://<authority><path>?<query> except that the port number
     * is broken out of authority to increase the number of permutations.
